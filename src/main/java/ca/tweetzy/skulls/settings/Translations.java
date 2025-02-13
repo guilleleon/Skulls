@@ -42,7 +42,7 @@ public final class Translations extends TranslationManager {
 	public static final TranslationEntry ID_TAKEN = create("misc.id taken", "&cThat category id is already in use!");
 	public static final TranslationEntry CLAIM_DELAY = create("misc.claim delay", "&cYou can claim another head in &7(&e%time_difference%&7)");
 	public static final TranslationEntry RECEIVED_RANDOM_SKULL = create("misc.received random skull", "&aYou received a random skull &F(&E%skull_name%&f)");
-
+	public static final TranslationEntry PURCHASE_SUCCESS = create("misc.purchase success", "&aSuccessfully Purchased");
 
 	public static final TranslationEntry ALPHABET = create("categories.alphabet", "Alphabet");
 	public static final TranslationEntry ANIMALS = create("categories.animals", "Animals");

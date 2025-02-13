@@ -145,6 +145,7 @@ misc:
   no skull info: '&c无法确定该头颅的ID'
   category permission: '&c你没有权限访问该类别!'
   loading: '&c请稍等，仍在加载头颅'
+  purchase success: '&a购买成功!'
 conditionals:
   is true: '&A是'
   is allowed: '&a允许'
