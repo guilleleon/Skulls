@@ -111,6 +111,7 @@ public final class PlayerHeadGUI extends SkullsPagedGUI<OfflinePlayer> {
 
 			Skulls.getEconomyManager().withdraw(player, price);
 			player.getInventory().addItem(buildHead(target));
+			Common.tell(player, TranslationManager.string(Translations.PURCHASE_SUCCESS));
 		}
 	}
 

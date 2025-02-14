@@ -140,6 +140,7 @@ public final class SkullsViewGUI extends SkullsPagedGUI<Skull> {
 
 			Skulls.getEconomyManager().withdraw(player, price);
 			player.getInventory().addItem(skull.getItemStack());
+			Common.tell(player, TranslationManager.string(Translations.PURCHASE_SUCCESS));
 		}
 
 		if (event.clickType == ClickType.RIGHT) {
