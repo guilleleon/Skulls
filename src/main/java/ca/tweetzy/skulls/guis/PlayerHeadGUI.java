@@ -23,6 +23,7 @@ import ca.tweetzy.flight.gui.Gui;
 import ca.tweetzy.flight.gui.events.GuiClickEvent;
 import ca.tweetzy.flight.settings.TranslationManager;
 import ca.tweetzy.flight.utils.Common;
+import ca.tweetzy.flight.utils.PlayerUtil;
 import ca.tweetzy.flight.utils.QuickItem;
 import ca.tweetzy.flight.utils.profiles.builder.XSkull;
 import ca.tweetzy.flight.utils.profiles.objects.ProfileInputType;
@@ -93,14 +94,14 @@ public final class PlayerHeadGUI extends SkullsPagedGUI<OfflinePlayer> {
 
 		if (click.clickType == ClickType.LEFT) {
 			if (!Settings.CHARGE_FOR_HEADS.getBoolean()) {
-				player.getInventory().addItem(buildHead(target));
+				PlayerUtil.giveItem(player, buildHead(target));
 				return;
 			}
 
 			final double price = player.hasPermission("skulls.freeskulls") ? 0 : Settings.DEFAULT_PRICES_PLAYER_HEADS.getDouble();
 
 			if (price <= 0) {
-				player.getInventory().addItem(buildHead(target));
+				PlayerUtil.giveItem(player, buildHead(target));
 				return;
 			}
 
@@ -110,7 +111,7 @@ public final class PlayerHeadGUI extends SkullsPagedGUI<OfflinePlayer> {
 			}
 
 			Skulls.getEconomyManager().withdraw(player, price);
-			player.getInventory().addItem(buildHead(target));
+			PlayerUtil.giveItem(player, buildHead(target));
 			Common.tell(player, TranslationManager.string(Translations.PURCHASE_SUCCESS));
 		}
 	}

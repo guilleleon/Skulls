@@ -22,6 +22,7 @@ import ca.tweetzy.flight.gui.Gui;
 import ca.tweetzy.flight.gui.events.GuiClickEvent;
 import ca.tweetzy.flight.settings.TranslationManager;
 import ca.tweetzy.flight.utils.Common;
+import ca.tweetzy.flight.utils.PlayerUtil;
 import ca.tweetzy.flight.utils.QuickItem;
 import ca.tweetzy.skulls.Skulls;
 import ca.tweetzy.skulls.api.enums.ViewMode;
@@ -122,14 +123,14 @@ public final class SkullsViewGUI extends SkullsPagedGUI<Skull> {
 			}
 
 			if (!Settings.CHARGE_FOR_HEADS.getBoolean()) {
-				player.getInventory().addItem(skull.getItemStack());
+				PlayerUtil.giveItem(player, skull.getItemStack());
 				return;
 			}
 
 			final double price = player.hasPermission("skulls.freeskulls") ? 0 : skull.getPrice();
 
 			if (price <= 0) {
-				player.getInventory().addItem(skull.getItemStack());
+				PlayerUtil.giveItem(player, skull.getItemStack());
 				return;
 			}
 
@@ -139,7 +140,7 @@ public final class SkullsViewGUI extends SkullsPagedGUI<Skull> {
 			}
 
 			Skulls.getEconomyManager().withdraw(player, price);
-			player.getInventory().addItem(skull.getItemStack());
+			PlayerUtil.giveItem(player, skull.getItemStack());
 			Common.tell(player, TranslationManager.string(Translations.PURCHASE_SUCCESS));
 		}
 
