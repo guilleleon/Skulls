@@ -22,6 +22,7 @@ import ca.tweetzy.flight.gui.Gui;
 import ca.tweetzy.flight.gui.events.GuiClickEvent;
 import ca.tweetzy.flight.settings.TranslationManager;
 import ca.tweetzy.flight.utils.Common;
+import ca.tweetzy.flight.utils.PlayerUtil;
 import ca.tweetzy.flight.utils.QuickItem;
 import ca.tweetzy.skulls.Skulls;
 import ca.tweetzy.skulls.api.enums.ViewMode;
@@ -36,6 +37,7 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Date Created: April 21 2022
@@ -121,25 +123,19 @@ public final class SkullsViewGUI extends SkullsPagedGUI<Skull> {
 				return;
 			}
 
-			if (!Settings.CHARGE_FOR_HEADS.getBoolean()) {
-				player.getInventory().addItem(skull.getItemStack());
+			if (Settings.ASK_FOR_BUY_CONFIRM.getBoolean()) {
+				event.manager.showGUI(event.player, new ConfirmGUI(this, event.player, confirmed -> {
+					if (confirmed) {
+						handleBuy(skull);
+						event.manager.showGUI(event.player, this);
+					} else {
+						event.manager.showGUI(event.player, this);
+					}
+				}));
 				return;
 			}
 
-			final double price = player.hasPermission("skulls.freeskulls") ? 0 : skull.getPrice();
-
-			if (price <= 0) {
-				player.getInventory().addItem(skull.getItemStack());
-				return;
-			}
-
-			if (!Skulls.getEconomyManager().has(player, price)) {
-				Common.tell(player, TranslationManager.string(Translations.NO_MONEY));
-				return;
-			}
-
-			Skulls.getEconomyManager().withdraw(player, price);
-			player.getInventory().addItem(skull.getItemStack());
+			handleBuy(skull);
 		}
 
 		if (event.clickType == ClickType.RIGHT) {
@@ -159,6 +155,29 @@ public final class SkullsViewGUI extends SkullsPagedGUI<Skull> {
 		if (event.clickType == ClickType.NUMBER_KEY && player.hasPermission("skulls.admin")) {
 			event.manager.showGUI(player, new SkullEditGUI(this, player, skull, this.page));
 		}
+	}
+
+	private void handleBuy(Skull skull) {
+		if (!Settings.CHARGE_FOR_HEADS.getBoolean()) {
+			PlayerUtil.giveItem(player, skull.getItemStack());
+			return;
+		}
+
+		final double price = player.hasPermission("skulls.freeskulls") ? 0 : skull.getPrice();
+
+		if (price <= 0) {
+			PlayerUtil.giveItem(player, skull.getItemStack());
+			return;
+		}
+
+		if (!Skulls.getEconomyManager().has(player, price)) {
+			Common.tell(player, TranslationManager.string(Translations.NO_MONEY));
+			return;
+		}
+
+		Skulls.getEconomyManager().withdraw(player, price);
+		PlayerUtil.giveItem(player, skull.getItemStack());
+		Common.tell(player, TranslationManager.string(Translations.PURCHASE_SUCCESS));
 	}
 
 	@Override

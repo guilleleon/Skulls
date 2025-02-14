@@ -18,6 +18,7 @@
 
 package ca.tweetzy.skulls.impl.economy;
 
+import ca.tweetzy.flight.utils.Common;
 import ca.tweetzy.skulls.exception.CurrencyNotFoundException;
 import lombok.NonNull;
 import me.TechsCode.UltraEconomy.UltraEconomy;
@@ -35,6 +36,9 @@ public final class UltraEconomyEconomy extends MultiCurrencyEconomy {
 
 		if (this.currency == null)
 			throw new CurrencyNotFoundException("Could not find the currency: '" + this.currencyName + "' from " + this.getName() + ", please check spelling or if it even exists.");
+
+		Common.log("&aSetting up UltraEconomy economy provider");
+
 	}
 
 	@Override

@@ -38,7 +38,7 @@ public final class Settings extends FlightSettings {
 	public static final ConfigEntry PREFIX = create("prefix", "<GRADIENT:DD5E89>&lSkulls</GRADIENT:fbc7d4>&r &8»").withComment("Prefix to be used in chat");
 	public static final ConfigEntry CHARGE_FOR_HEADS = create("charge for heads", true).withComment("Should skulls charge users without permission for heads?");
 	public static final ConfigEntry SKULLS_DATA_SOURCE_URL = create("data url", "https://raw.githubusercontent.com/Tweetzy/Data-Files/main/Skulls/skulls.json").withComment("Do not touch this if you don't know what you are doing!");
-	public static final ConfigEntry ECONOMY = create("economy", "Vault").withComment("You can use Vault or Item");
+	public static final ConfigEntry ECONOMY = create("economy", "Vault").withComment("You can use Vault or Item or CoinsEngine or UltraEconomy\n# If you use CoinsEngine, please enter \"coinsengine:money\"\n# If you use UltraEconomy, please enter \"ultraeconomy:money\"");
 	public static final ConfigEntry ITEM_ECONOMY_ITEM = create("item economy item", CompMaterial.GOLD_INGOT.name());
 	public static final ConfigEntry MAIN_MENU_REQUIRES_NO_PERM = create("main menu requires no permission", true);
 	public static final ConfigEntry GENERAL_USAGE_REQUIRES_NO_PERM = create("general usage requires no permission", false, "If true, no permission is required to use except for admin stuff");
@@ -46,6 +46,7 @@ public final class Settings extends FlightSettings {
 	public static final ConfigEntry SKULL_TRACKING = create("track skull placement", true, "If disabled skulls will no longer drop in creative");
 	public static final ConfigEntry RANDOM_HEAD_BUTTON_ENABLED = create("random head button.enabled", false, "If enabled players can click to receive a random head (only from categories they have access too)");
 	public static final ConfigEntry RANDOM_HEAD_BUTTON_PRICE = create("random head button.price", 1.0, "The price for using the random head button");
+	public static final ConfigEntry ASK_FOR_BUY_CONFIRM = create("ask for purchase confirmation", false, "If true, players will just need to confirm if they want to buy a skull.");
 
 	public static final ConfigEntry CATEGORIES_ALPHABET_ENABLED = create("enabled categories.alphabet", true);
 	public static final ConfigEntry CATEGORIES_ANIMALS_ENABLED = create("enabled categories.animals", true);
@@ -77,6 +78,11 @@ public final class Settings extends FlightSettings {
 	public static final ConfigEntry GUI_SHARED_ITEMS_EXIT_BUTTON = create("gui.shared buttons.exit button.item", CompMaterial.BARRIER.name());
 	public static final ConfigEntry GUI_SHARED_ITEMS_PREVIOUS_BUTTON = create("gui.shared buttons.previous button.item", CompMaterial.ARROW.name());
 	public static final ConfigEntry GUI_SHARED_ITEMS_NEXT_BUTTON = create("gui.shared buttons.next button.item", CompMaterial.ARROW.name());
+
+	public static ConfigEntry GUI_CONFIRM_ACTION_BACKGROUND = create("gui.confirm action.background", CompMaterial.BLACK_STAINED_GLASS_PANE.name());
+	public static ConfigEntry GUI_CONFIRM_ACTION_ITEMS_YES = create("gui.confirm action.items.confirm", CompMaterial.LIME_STAINED_GLASS_PANE.name());
+	public static ConfigEntry GUI_CONFIRM_ACTION_ITEMS_NO = create("gui.confirm action.items.cancel", CompMaterial.RED_STAINED_GLASS_PANE.name());
+
 
 	public static final ConfigEntry GUI_MAIN_ITEMS_FAVOURITES_SLOT = create("gui.main.items.favourites.slot", 42, "-1 to disable it");
 	public static final ConfigEntry GUI_MAIN_ITEMS_SEARCH_SLOT = create("gui.main.items.search.slot", 41, "-1 to disable it");

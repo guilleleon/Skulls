@@ -23,6 +23,7 @@ import ca.tweetzy.flight.gui.Gui;
 import ca.tweetzy.flight.gui.events.GuiClickEvent;
 import ca.tweetzy.flight.settings.TranslationManager;
 import ca.tweetzy.flight.utils.Common;
+import ca.tweetzy.flight.utils.PlayerUtil;
 import ca.tweetzy.flight.utils.QuickItem;
 import ca.tweetzy.flight.utils.profiles.builder.XSkull;
 import ca.tweetzy.flight.utils.profiles.objects.ProfileInputType;
@@ -38,6 +39,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
+import scala.concurrent.impl.FutureConvertersImpl;
 
 import java.util.ArrayList;
 
@@ -92,26 +94,42 @@ public final class PlayerHeadGUI extends SkullsPagedGUI<OfflinePlayer> {
 		final Player player = click.player;
 
 		if (click.clickType == ClickType.LEFT) {
-			if (!Settings.CHARGE_FOR_HEADS.getBoolean()) {
-				player.getInventory().addItem(buildHead(target));
+			if (Settings.ASK_FOR_BUY_CONFIRM.getBoolean()) {
+				click.manager.showGUI(click.player, new ConfirmGUI(this, click.player, confirmed -> {
+					if (confirmed) {
+						handleBuy(player, target);
+						click.manager.showGUI(click.player, this);
+					} else {
+						click.manager.showGUI(click.player, this);
+					}
+				}));
 				return;
 			}
-
-			final double price = player.hasPermission("skulls.freeskulls") ? 0 : Settings.DEFAULT_PRICES_PLAYER_HEADS.getDouble();
-
-			if (price <= 0) {
-				player.getInventory().addItem(buildHead(target));
-				return;
-			}
-
-			if (!Skulls.getEconomyManager().has(player, price)) {
-				Common.tell(player, TranslationManager.string(Translations.NO_MONEY));
-				return;
-			}
-
-			Skulls.getEconomyManager().withdraw(player, price);
-			player.getInventory().addItem(buildHead(target));
+			handleBuy(player, target);
 		}
+	}
+
+	private void handleBuy(Player player, OfflinePlayer target) {
+		if (!Settings.CHARGE_FOR_HEADS.getBoolean()) {
+			PlayerUtil.giveItem(player, buildHead(target));
+			return;
+		}
+
+		final double price = player.hasPermission("skulls.freeskulls") ? 0 : Settings.DEFAULT_PRICES_PLAYER_HEADS.getDouble();
+
+		if (price <= 0) {
+			PlayerUtil.giveItem(player, buildHead(target));
+			return;
+		}
+
+		if (!Skulls.getEconomyManager().has(player, price)) {
+			Common.tell(player, TranslationManager.string(Translations.NO_MONEY));
+			return;
+		}
+
+		Skulls.getEconomyManager().withdraw(player, price);
+		PlayerUtil.giveItem(player, buildHead(target));
+		Common.tell(player, TranslationManager.string(Translations.PURCHASE_SUCCESS));
 	}
 
 	private ItemStack buildHead(@NonNull final OfflinePlayer target) {

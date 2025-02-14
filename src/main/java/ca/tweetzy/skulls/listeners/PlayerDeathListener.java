@@ -18,6 +18,8 @@
 
 package ca.tweetzy.skulls.listeners;
 
+import ca.tweetzy.flight.utils.Common;
+import ca.tweetzy.flight.utils.PlayerUtil;
 import ca.tweetzy.flight.utils.QuickItem;
 import ca.tweetzy.skulls.api.events.PlayerPreSkullDropEvent;
 import ca.tweetzy.skulls.api.events.PlayerSkullDropEvent;
@@ -43,7 +45,9 @@ public final class PlayerDeathListener implements Listener {
 		final Player player = event.getEntity();
 		final Random random = new Random();
 
-		if (random.nextDouble() * 100D < Settings.PLAYER_HEAD_DROP_CHANCE.getInt()) {
+		final int dropChance = Math.max(Settings.PLAYER_HEAD_DROP_CHANCE.getInt(), PlayerUtil.getNumberPermission(player, "skulls.headdropchance", Settings.PLAYER_HEAD_DROP_CHANCE.getInt()));
+
+		if (random.nextDouble() * 100D < dropChance) {
 			final Location dropLocation = player.getLocation();
 			final ItemStack skull = QuickItem.of(player).name(Settings.PLAYER_HEAD_NAME.getString().replace("%player_name%", player.getName())).make();
 

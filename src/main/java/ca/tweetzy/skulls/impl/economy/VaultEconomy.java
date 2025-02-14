@@ -43,6 +43,7 @@ public final class VaultEconomy implements Economy {
 		}
 
 		this.economy = rsp.getProvider();
+		Common.log("&aSetting up vault economy provider");
 	}
 
 	@Override
