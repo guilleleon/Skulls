@@ -76,6 +76,15 @@ public final class Translations extends TranslationManager {
 	);
 
 	// GUIS
+
+	public static TranslationEntry GUI_CONFIRM_ACTION_TITLE = create("gui.confirm action.title", "%pl_name% &f- &7Are you sure?");
+	public static TranslationEntry GUI_CONFIRM_ACTION_ITEMS_YES_NAME = create("gui.confirm action.items.confirm.name", "<GRADIENT:4ab310>&lConfirm</GRADIENT:7ed664>");
+	public static TranslationEntry GUI_CONFIRM_ACTION_ITEMS_YES_LORE = create("gui.confirm action.items.confirm.lore", "&e&lClick &7to confirm action");
+
+	public static TranslationEntry GUI_CONFIRM_ACTION_ITEMS_NO_NAME = create("gui.confirm action.items.cancel.name", "<GRADIENT:9c0505>&lCancel</GRADIENT:c26a6a>");
+	public static TranslationEntry GUI_CONFIRM_ACTION_ITEMS_NO_LORE = create("gui.confirm action.items.cancel.lore", "&e&lClick &7to confirm action");
+
+
 	public static TranslationEntry GUI_SHARED_ITEMS_BACK_BUTTON_NAME = create("gui.shared buttons.back button.name", "<GRADIENT:DD5E89>&LGo Back</GRADIENT:fbc7d4>");
 	public static TranslationEntry GUI_SHARED_ITEMS_BACK_BUTTON_LORE = create("gui.shared buttons.back button.lore",
 			"&e&lClick &8» &7to go back"

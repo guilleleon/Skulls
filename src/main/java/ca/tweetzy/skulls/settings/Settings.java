@@ -46,6 +46,7 @@ public final class Settings extends FlightSettings {
 	public static final ConfigEntry SKULL_TRACKING = create("track skull placement", true, "If disabled skulls will no longer drop in creative");
 	public static final ConfigEntry RANDOM_HEAD_BUTTON_ENABLED = create("random head button.enabled", false, "If enabled players can click to receive a random head (only from categories they have access too)");
 	public static final ConfigEntry RANDOM_HEAD_BUTTON_PRICE = create("random head button.price", 1.0, "The price for using the random head button");
+	public static final ConfigEntry ASK_FOR_BUY_CONFIRM = create("ask for purchase confirmation", false, "If true, players will just need to confirm if they want to buy a skull.");
 
 	public static final ConfigEntry CATEGORIES_ALPHABET_ENABLED = create("enabled categories.alphabet", true);
 	public static final ConfigEntry CATEGORIES_ANIMALS_ENABLED = create("enabled categories.animals", true);
@@ -77,6 +78,11 @@ public final class Settings extends FlightSettings {
 	public static final ConfigEntry GUI_SHARED_ITEMS_EXIT_BUTTON = create("gui.shared buttons.exit button.item", CompMaterial.BARRIER.name());
 	public static final ConfigEntry GUI_SHARED_ITEMS_PREVIOUS_BUTTON = create("gui.shared buttons.previous button.item", CompMaterial.ARROW.name());
 	public static final ConfigEntry GUI_SHARED_ITEMS_NEXT_BUTTON = create("gui.shared buttons.next button.item", CompMaterial.ARROW.name());
+
+	public static ConfigEntry GUI_CONFIRM_ACTION_BACKGROUND = create("gui.confirm action.background", CompMaterial.BLACK_STAINED_GLASS_PANE.name());
+	public static ConfigEntry GUI_CONFIRM_ACTION_ITEMS_YES = create("gui.confirm action.items.confirm", CompMaterial.LIME_STAINED_GLASS_PANE.name());
+	public static ConfigEntry GUI_CONFIRM_ACTION_ITEMS_NO = create("gui.confirm action.items.cancel", CompMaterial.RED_STAINED_GLASS_PANE.name());
+
 
 	public static final ConfigEntry GUI_MAIN_ITEMS_FAVOURITES_SLOT = create("gui.main.items.favourites.slot", 42, "-1 to disable it");
 	public static final ConfigEntry GUI_MAIN_ITEMS_SEARCH_SLOT = create("gui.main.items.search.slot", 41, "-1 to disable it");
