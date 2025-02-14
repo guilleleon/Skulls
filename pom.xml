@@ -7,7 +7,7 @@
     <artifactId>skulls</artifactId>
 
     <name>Skulls</name>
-    <version>3.23.0</version>
+    <version>3.24.0</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -15,7 +15,7 @@
         <jarName>Skulls-${project.version}</jarName>
         <main.class>${project.groupId}.${project.artifactId}.${project.name}</main.class>
         <java.version>16</java.version>
-        <flight.version>3.30.0</flight.version>
+        <flight.version>3.30.1</flight.version>
         <flight.path>ca.tweetzy</flight.path>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -61,6 +61,11 @@
         <repository>
             <id>aikar</id>
             <url>https://repo.aikar.co/content/groups/aikar/</url>
+        </repository>
+        <repository>
+            <id>nightexpress-releases</id>
+            <name>NightExpress's Repository</name>
+            <url>https://repo.nightexpressdev.com/releases</url>
         </repository>
     </repositories>
     <dependencies>
@@ -114,8 +119,7 @@
             <groupId>su.nightexpress.coinsengine</groupId>
             <artifactId>CoinsEngine</artifactId>
             <version>2.4.1</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/libs/CoinsEngine-2.4.1.jar</systemPath>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
     <build>
